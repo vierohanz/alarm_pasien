@@ -1,10 +1,14 @@
+import 'package:alarm_pasien/controllers/patientController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class nursePage extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
+    final patientC = Get.put(patientController());
     final hp = MediaQuery.of(context).size.height;
     final wp = MediaQuery.of(context).size.width;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -22,27 +26,48 @@ class nursePage extends StatelessWidget {
                     width: wp * 0.5,
                     height: hp,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/doctor.png"),
-                            fit: BoxFit.cover)),
-                  ),
-                  Container(
-                    width: wp * 0.5,
-                    height: hp,
-                    child: Center(
-                      child: Text(
-                        "15",
-                        style: TextStyle(
-                            decoration: TextDecoration.none,
-                            fontSize: wp * 0.25,
-                            fontWeight: FontWeight.bold),
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/doctor.png"),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  )
+                  ),
+                  GetBuilder<patientController>(
+                    builder: (controller) {
+                      return Container(
+                        width: wp * 0.5,
+                        height: hp,
+                        child: Center(
+                          child: Text(
+                            "${controller.activeCount}", // Display active count
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              fontSize: wp * 0.25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
-            Container()
+            Expanded(
+              child: GetBuilder<patientController>(
+                builder: (controller) {
+                  // Display a list of active messages below
+                  return ListView.builder(
+                    itemCount: controller.activeMessages.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(controller.activeMessages[index]),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

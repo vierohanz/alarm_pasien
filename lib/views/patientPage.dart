@@ -37,14 +37,9 @@ class patientPage extends StatelessWidget {
                         ),
                         SizedBox(height: 12),
                         GetBuilder<patientController>(builder: (controller) {
-                          // Check if the patient data for "Raena" is available
-                          // if (controller.patientM["Raena"] == null) {
-                          //   return Text("Loading...");
-                          // }
-
                           return ElevatedButton(
                             onPressed: () {
-                              controller.togglePatientMtatus(patientName);
+                              controller.togglePatientMStatus(patientName);
                             },
                             child: Container(
                               height: hp * 0.05,
@@ -80,14 +75,9 @@ class patientPage extends StatelessWidget {
                         ),
                         SizedBox(height: 12),
                         GetBuilder<patientController>(builder: (controller) {
-                          // Check if the patient data for "Raena" is available
-                          // if (controller.patientM["Bintang"] == null) {
-                          //   return Text("Loading...");
-                          // }
-
                           return ElevatedButton(
                             onPressed: () {
-                              controller.togglePatientMtatus(patientName);
+                              controller.togglePatientMStatus("Bintang");
                             },
                             child: Container(
                               height: hp * 0.05,
@@ -133,21 +123,27 @@ class patientPage extends StatelessWidget {
                         SizedBox(
                           height: 12,
                         ),
-                        ElevatedButton(
-                            onPressed: () {},
+                        GetBuilder<patientController>(builder: (controller) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              controller.togglePatientMStatus("Vina");
+                            },
                             child: Container(
-                              height: hp * 0.02,
+                              height: hp * 0.05,
                               width: wp * 0.2,
                               child: Center(
                                 child: Text(
                                   "Vina",
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: hp * 0.02),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: hp * 0.02,
+                                  ),
                                 ),
                               ),
-                            ))
+                            ),
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -166,21 +162,27 @@ class patientPage extends StatelessWidget {
                         SizedBox(
                           height: 12,
                         ),
-                        ElevatedButton(
-                            onPressed: () {},
+                        GetBuilder<patientController>(builder: (controller) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              controller.togglePatientMStatus("Lala");
+                            },
                             child: Container(
-                              height: hp * 0.02,
+                              height: hp * 0.05,
                               width: wp * 0.2,
                               child: Center(
                                 child: Text(
                                   "Lala",
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: hp * 0.02),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: hp * 0.02,
+                                  ),
                                 ),
                               ),
-                            ))
+                            ),
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -209,21 +211,27 @@ class patientPage extends StatelessWidget {
                         SizedBox(
                           height: 12,
                         ),
-                        ElevatedButton(
-                            onPressed: () {},
+                        GetBuilder<patientController>(builder: (controller) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              controller.togglePatientMStatus("Beta");
+                            },
                             child: Container(
-                              height: hp * 0.02,
+                              height: hp * 0.05,
                               width: wp * 0.2,
                               child: Center(
                                 child: Text(
                                   "Beta",
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: hp * 0.02),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: hp * 0.02,
+                                  ),
                                 ),
                               ),
-                            ))
+                            ),
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -242,21 +250,27 @@ class patientPage extends StatelessWidget {
                         SizedBox(
                           height: 12,
                         ),
-                        ElevatedButton(
-                            onPressed: () {},
+                        GetBuilder<patientController>(builder: (controller) {
+                          return ElevatedButton(
+                            onPressed: () {
+                              controller.togglePatientMStatus("Fuma");
+                            },
                             child: Container(
-                              height: hp * 0.02,
+                              height: hp * 0.05,
                               width: wp * 0.2,
                               child: Center(
                                 child: Text(
                                   "Fuma",
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: hp * 0.02),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: hp * 0.02,
+                                  ),
                                 ),
                               ),
-                            ))
+                            ),
+                          );
+                        }),
                       ],
                     ),
                   ),

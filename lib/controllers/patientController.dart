@@ -1,4 +1,3 @@
-// controllers/patient_controller.dart
 import 'package:alarm_pasien/models/patientModel.dart';
 import 'package:get/get.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -6,9 +5,10 @@ import 'package:firebase_database/firebase_database.dart';
 class patientController extends GetxController {
   final DatabaseReference databaseRef =
       FirebaseDatabase.instance.ref('alarm-db');
-
-  // Buat variabel pasien untuk setiap pasien yang ada di Firebase
   var patientM = <String, patientModel>{}.obs;
+
+  // Use a reactive list for messages if needed, otherwise just keep the count
+  final List<String> _activeMessages = [];
 
   @override
   void onInit() {
@@ -16,7 +16,19 @@ class patientController extends GetxController {
     _fetchPatientMData();
   }
 
-  // Fungsi untuk mengambil data dari Firebase
+  // Getter to count active patients based on their status
+  int get activeCount {
+    return patientM.values.where((patient) => patient.status.value).length;
+  }
+
+  void addMessage(String message) {
+    _activeMessages.add(message);
+    update(); // Notify listeners
+  }
+
+  // Method to get active messages
+  List<String> get activeMessages => _activeMessages;
+
   void _fetchPatientMData() {
     databaseRef.onValue.listen((event) {
       final data = Map<String, dynamic>.from(event.snapshot.value as Map);
@@ -25,19 +37,19 @@ class patientController extends GetxController {
         final patientData = Map<String, dynamic>.from(value);
         patientM[key] = patientModel.fromJson(patientData);
       });
+      update(); // Notify listeners after fetching data
     });
   }
 
-  // Fungsi untuk mengubah status pasien
-  void togglePatientMtatus(String patientName) {
+  void togglePatientMStatus(String patientName) {
     if (patientM.containsKey(patientName)) {
       final patient = patientM[patientName]!;
       patient.status.value = !patient.status.value;
 
-      // Update status di Firebase
       databaseRef
           .child(patientName)
           .update({'status': patient.status.value ? '1' : '0'});
+      update(); // Notify listeners after toggling status
     }
   }
 }
