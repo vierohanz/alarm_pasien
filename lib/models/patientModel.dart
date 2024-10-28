@@ -1,18 +1,26 @@
+// models/patient_model.dart
 import 'package:get/get.dart';
 
 class patientModel {
-  var valueRaena = false.obs;
-  var valueVina = false.obs;
-  var valueLala = false.obs;
-  var valueDina = false.obs;
-  var valueFuma = false.obs;
-  var valueBeta = false.obs;
+  var message = ''.obs;
+  var status = false.obs; // Menggunakan boolean untuk status
 
-  // main
-  var Raena = ''.obs;
-  var Vina = ''.obs;
-  var Lala = ''.obs;
-  var Dina = ''.obs;
-  var Fuma = ''.obs;
-  var Beta = ''.obs;
+  patientModel({required String message, required bool status}) {
+    this.message.value = message;
+    this.status.value = status;
+  }
+
+  factory patientModel.fromJson(Map<dynamic, dynamic> json) {
+    return patientModel(
+      message: json['pesan'] ?? '',
+      status: json['status'] == '1',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'pesan': message.value,
+      'status': status.value ? '1' : '0',
+    };
+  }
 }

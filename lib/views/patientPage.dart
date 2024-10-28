@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class patientPage extends StatelessWidget {
-  final patientC = Get.put(patientController());
-  patientPage({super.key});
+  final String patientName;
+
+  patientPage({required this.patientName});
   Widget build(BuildContext context) {
+    final patientC = Get.put(patientController());
     final hp = MediaQuery.of(context).size.height;
     final wp = MediaQuery.of(context).size.width;
     return MaterialApp(
@@ -18,7 +20,6 @@ class patientPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: hp * 0.28,
               child: Row(
                 children: [
                   Container(
@@ -28,31 +29,39 @@ class patientPage extends StatelessWidget {
                         Container(
                           height: hp * 0.2,
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      AssetImage("assets/images/patient_1.png"),
-                                  fit: BoxFit.contain)),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/patient_1.png"),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Obx(
-                          () => ElevatedButton(
-                              onPressed: () => patientC.ledControlRaena,
-                              child: Container(
-                                height: hp * 0.02,
-                                width: wp * 0.2,
-                                child: Center(
-                                  child: Text(
-                                    "Raena",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: hp * 0.02),
+                        SizedBox(height: 12),
+                        GetBuilder<patientController>(builder: (controller) {
+                          // Check if the patient data for "Raena" is available
+                          // if (controller.patientM["Raena"] == null) {
+                          //   return Text("Loading...");
+                          // }
+
+                          return ElevatedButton(
+                            onPressed: () {
+                              controller.togglePatientMtatus(patientName);
+                            },
+                            child: Container(
+                              height: hp * 0.05,
+                              width: wp * 0.2,
+                              child: Center(
+                                child: Text(
+                                  "Raena",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: hp * 0.02,
                                   ),
                                 ),
-                              )),
-                        )
+                              ),
+                            ),
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -63,29 +72,39 @@ class patientPage extends StatelessWidget {
                         Container(
                           height: hp * 0.2,
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      AssetImage("assets/images/patient_2.png"),
-                                  fit: BoxFit.contain)),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/patient_2.png"),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {},
+                        SizedBox(height: 12),
+                        GetBuilder<patientController>(builder: (controller) {
+                          // Check if the patient data for "Raena" is available
+                          // if (controller.patientM["Bintang"] == null) {
+                          //   return Text("Loading...");
+                          // }
+
+                          return ElevatedButton(
+                            onPressed: () {
+                              controller.togglePatientMtatus(patientName);
+                            },
                             child: Container(
-                              height: hp * 0.02,
+                              height: hp * 0.05,
                               width: wp * 0.2,
                               child: Center(
                                 child: Text(
-                                  "Dina",
+                                  "Bintang",
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: hp * 0.02),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: hp * 0.02,
+                                  ),
                                 ),
                               ),
-                            ))
+                            ),
+                          );
+                        }),
                       ],
                     ),
                   ),

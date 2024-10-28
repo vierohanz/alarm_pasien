@@ -18,7 +18,12 @@ class bottomBar extends StatelessWidget {
         height: hp,
         child: PageView(
           controller: bottomBarC.pageController,
-          children: [patientPage(), nursePage()],
+          children: [
+            patientPage(
+              patientName: "Raena",
+            ),
+            nursePage()
+          ],
           onPageChanged: (index) {
             bottomBarC.changePage(index);
           },
